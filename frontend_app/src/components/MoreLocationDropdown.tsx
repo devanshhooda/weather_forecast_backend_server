@@ -30,7 +30,7 @@ const MoreLocationDropdown = ({
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="success">
+            <Dropdown.Toggle variant="danger">
                 Add More
             </Dropdown.Toggle>
             <Dropdown.Menu>
