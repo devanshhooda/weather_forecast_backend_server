@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const locationRoutes = require('./routes/locationRoutes');
+const cors = require('cors')
 
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
 });
 
+app.use(cors())
 app.use(bodyParser.json());
 
 app.use('/api', locationRoutes);
