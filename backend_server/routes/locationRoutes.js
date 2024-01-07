@@ -57,18 +57,16 @@ router.get('/locations/:id/weather', async (req, res) => {
 
     const weatherResponse = await axios.get(weatherApiEndpoint);
 
-    console.log(`weatherResponse: ${weatherResponse}`);
-
     // Extract relevant data from the weather API response
     const weatherData = weatherResponse.data.forecast.forecastday.map((day) => ({
-      dayOfWeek: day.date,
+      dayOfWeek: Date(day.date).toString().split(" ")[0],
       todayMarker: day.date === weatherResponse.data.forecast.forecastday[0].date,
       date: day.date,
       temperature: day.day.avgtemp_c,
       description: day.day.condition.text,
     }));
 
-    // console.log(`weatherData: ${weatherData}`);
+    console.log(`weatherData: ${weatherData}`);
 
     res.status(200).json({ data: weatherData });
   } catch (error) {
