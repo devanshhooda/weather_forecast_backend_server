@@ -79,4 +79,17 @@ To obtain a Weather API key, visit [WeatherAPI](https://www.weatherapi.com/) and
 
 4. Open your browser and go to the URL provided in the terminal.
 
+## Adding Locations
 
+1. Ensure that the backend server is running.
+
+2. Use API tools like Postman to add locations. Send a POST request to http://localhost:{your-port}/api/locations with the location details in the request body.
+
+    Example JSON payload:
+
+    ```bash
+    {
+        "name": "CityName",
+        "latitude": 123.456,
+        "longitude": 789.012
+    }
