@@ -38,11 +38,20 @@ Make sure you have the following installed before setting up the project:
    ```bash
    npm install
 
+## API Key Setup
+
+To obtain a Weather API key, visit [WeatherAPI](https://www.weatherapi.com/) and follow the instructions to create an account.
+
 ## Running the Backend
 
-1. Generate your Weather API key from WeatherAPI.
+1. Navigate to the backend folder:
 
-2. Create a `.env` file in the root of the backend folder with the following content:
+    ```bash
+    cd backend_server/
+
+2. Generate your Weather API key from the link provided in the above section.
+
+3. Create a `.env` file in the root of the backend folder with the following content:
 
     ```bash
     WEATHER_API_KEY=your-weather-api-key
@@ -61,7 +70,7 @@ Make sure you have the following installed before setting up the project:
 2. Navigate to the frontend folder:
 
     ```bash
-    cd frontend
+    cd frontend_app/
 
 3. Start the frontend application:
 
@@ -70,6 +79,4 @@ Make sure you have the following installed before setting up the project:
 
 4. Open your browser and go to the URL provided in the terminal.
 
-## API Key Setup
 
-To obtain a Weather API key, visit WeatherAPI and follow the instructions to create an account.
