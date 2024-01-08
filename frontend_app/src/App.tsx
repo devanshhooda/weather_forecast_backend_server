@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.css'
 import Heading from "./components/Heading";
 import MoreLocationDropdown from "./components/MoreLocationDropdown";
 import LocationComponent from "./components/LocationComponent";
 import WeatherForecast from "./components/WeatherForecast";
-import Spinner from "./components/Spinner";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:8800/api";
@@ -25,12 +24,14 @@ function App() {
     description: string;
   }
 
+  const _locationsListKey = "locations_list";
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [locationsList, setLocationsList] = useState<Location[]>([]);
   const [weatherDataList, setWeatherData] = useState<WeatherData[] | null>([]);
 
   const handleLocationClick = (location: Location) => {
     setSelectedLocation(location);
+    setWeatherData(null);
 
     // Fetch weather data for the selected location
     axios.get(`/locations/${location._id}/weather`)
@@ -38,11 +39,21 @@ function App() {
       .catch(error => console.error('Error fetching weather data:', error));
   };
 
+  useEffect(() => {
+    // Fetch all locations from local storage
+    const storedLocations = localStorage.getItem(_locationsListKey);
+    if (storedLocations) {
+      setLocationsList(JSON.parse(storedLocations));
+    }
+  }, []);
+
   function handleAddLocation(location: Location) {
     const locationALreadyExist = locationsList.some((loc) => loc._id == location._id);
 
-    if (locationALreadyExist === false)
+    if (locationALreadyExist === false) {
       setLocationsList([...locationsList, location]);
+      localStorage.setItem(_locationsListKey, JSON.stringify(locationsList));
+    }
   }
 
   return (
@@ -69,9 +80,7 @@ function App() {
 
       {
         selectedLocation != null ?
-          weatherDataList != null ?
-            <WeatherForecast weatherDataList={weatherDataList} />
-            : <Spinner />
+          <WeatherForecast weatherDataList={weatherDataList} />
           : null
       }
 

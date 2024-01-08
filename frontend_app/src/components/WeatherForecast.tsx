@@ -1,3 +1,5 @@
+import Spinner from "./Spinner";
+
 interface WeatherData {
     dayOfWeek: string;
     todayMarker: boolean;
@@ -7,13 +9,15 @@ interface WeatherData {
 }
 
 interface WeatherForecastProps {
-    weatherDataList: WeatherData[]
+    weatherDataList: WeatherData[] | null
 }
 
 const WeatherForecast = ({ weatherDataList }: WeatherForecastProps) => {
     return (
         <div className="d-flex flex-wrap justify-content-center">
-            {weatherDataList.map((data) => (
+            {weatherDataList == null ?
+                <Spinner /> :
+                weatherDataList.map((data) => (
                     <div key={data.date} className="card m-2" style={{ width: '150px' }}>
                         <div className={`card-body ${data.todayMarker ? 'bg-primary text-white' : ''}`}>
                         <h5 className="card-title">{data.dayOfWeek}</h5>
