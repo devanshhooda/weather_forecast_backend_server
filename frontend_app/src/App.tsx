@@ -39,7 +39,10 @@ function App() {
   };
 
   function handleAddLocation(location: Location) {
-    setLocationsList([...locationsList, location]);
+    const locationALreadyExist = locationsList.some((loc) => loc._id == location._id);
+
+    if (locationALreadyExist === false)
+      setLocationsList([...locationsList, location]);
   }
 
   return (
