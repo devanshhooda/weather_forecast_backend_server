@@ -79,9 +79,7 @@ function App() {
       }} />
 
       {
-        selectedLocation != null ?
-          <WeatherForecast weatherDataList={weatherDataList} />
-          : null
+        selectedLocation && <WeatherForecast weatherDataList={weatherDataList} />
       }
 
     </div>
