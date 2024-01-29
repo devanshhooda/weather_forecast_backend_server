@@ -50,10 +50,15 @@ function App() {
   function handleAddLocation(location: Location) {
     const locationALreadyExist = locationsList.some((loc) => loc._id == location._id);
 
-    if (locationALreadyExist === false) {
-      setLocationsList([...locationsList, location]);
-      localStorage.setItem(_locationsListKey, JSON.stringify(locationsList));
-    }
+    if (locationALreadyExist) return;
+
+    setLocationsList([...locationsList, location]);
+
+    // Explicitly adding new location to the list here as the state takes time to update the actual value
+    locationsList.push(location);
+
+    // Saving the location in local storage here
+    localStorage.setItem(_locationsListKey, JSON.stringify(locationsList));
   }
 
   return (
